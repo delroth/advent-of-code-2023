@@ -46,4 +46,14 @@ fn main() {
     }
 
     println!("Sum 2: {}", sum2);
+
+    let mut multipliers = cards.iter().map(|_| 1 as u32).collect::<Vec<_>>();
+    for i in 0..cards.len() {
+        let n = cards[i][0].intersection(&cards[i][1]).count();
+        for j in i + 1..(i + 1 + n).min(cards.len()) {
+            multipliers[j] += multipliers[i]
+        }
+    }
+    let sum3: u32 = multipliers.iter().sum();
+    println!("Sum 3: {}", sum3);
 }
